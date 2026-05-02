@@ -1,5 +1,6 @@
 package net.lumynity.lib.util;
 
+import net.lumynity.lib.data.MobData;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
@@ -19,25 +20,14 @@ import net.lumynity.lib.LumynLib;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class EntityUtil {
     // Player
     public static void applyEffect(ServerPlayer player, MobEffect effects, int duration, int power) {
         player.addEffect(new MobEffectInstance(effects, duration, power, false, false, false));
-    }
-    public static void damage(Entity entity, Function<DamageSources, DamageSource> sourceSelector, float amount) {
-        if (entity != null) {
-            DamageSources sources = entity.level().damageSources();
-            DamageSource source = sourceSelector.apply(sources);
-
-            entity.hurt(source, amount);
-        }
-    }
-    public static void damageWithInterval(Entity entity, Function<DamageSources, DamageSource> sourceSelector, float amount, int interval) {
-        if (entity != null && entity.level().getGameTime() % interval == 0) {
-            damage(entity, sourceSelector, amount);
-        }
     }
     public static void moveToValidRespawnPos(ServerPlayer player) {
         BlockPos respawnPos = player.getRespawnPosition();
@@ -81,5 +71,22 @@ public class EntityUtil {
     // Generic
     public static <T extends Mob> List<T> getNearby(ServerPlayer player, Class<T> mob, double radius) {
         return player.level().getEntitiesOfClass(mob, player.getBoundingBox().inflate(radius));
+    }
+    // For a list of entities within an aea of a player
+    public static <T extends Mob> void executeForNearby(ServerPlayer player, List<MobData> dataList, BiConsumer<T, MobData> action) {
+        dataList.forEach(data ->
+            getNearby(player, data.entityClass().asSubclass(Mob.class), data.range())
+                .forEach(mob -> action.accept((T) mob, data))
+        );
+    }
+    // For a single entity
+    public static <T extends Mob> void executeForNearby(ServerPlayer player, Class<?> entityClass, double range, Consumer<T> action) {
+        getNearby(player, entityClass.asSubclass(Mob.class), range)
+            .forEach(mob -> action.accept((T) mob));
+    }
+
+    public static <T extends Mob> void executeForNearby(ServerPlayer player, Class<?> entityClass, double range, double speed, BiConsumer<T, Double> action) {
+        getNearby(player, entityClass.asSubclass(Mob.class), range)
+            .forEach(mob -> action.accept((T) mob, speed));
     }
 }
