@@ -7,7 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 import net.lumynity.lib.config.ConfigSerializer;
 import net.lumynity.lib.config.screen.client.ConfigScreen;
 import net.lumynity.lib.config.toml.TomlElement;
@@ -19,9 +19,9 @@ import java.util.List;
 
 public class ConfigScreenNetwork {
 
-    public static ResourceLocation SEND_CONFIG_SCREEN_PACKET = LumynLib.asResource("send_config_screen_packet");
-    public static ResourceLocation REQUEST_CONFIG_PACKET = LumynLib.asResource("request_config_packet");
-    public static ResourceLocation MODIFY_VALUE_PACKET = LumynLib.asResource("modify_value_packet");
+    public static ResourceLocation SEND_CONFIG_SCREEN_PACKET = LumynAPI.asResource("send_config_screen_packet");
+    public static ResourceLocation REQUEST_CONFIG_PACKET = LumynAPI.asResource("request_config_packet");
+    public static ResourceLocation MODIFY_VALUE_PACKET = LumynAPI.asResource("modify_value_packet");
 
     public static void registerPackets() {
         NetworkManager.registerReceiver(NetworkManager.Side.S2C, SEND_CONFIG_SCREEN_PACKET, (buf, context) -> {
@@ -30,19 +30,19 @@ public class ConfigScreenNetwork {
             buf.readBytes(bytes);
             String tomlString = new String(bytes, StandardCharsets.UTF_8);
 
-            LumynLib.LOGGER.info("UwU");
+            LumynAPI.LOGGER.info("UwU");
             try {
-                LumynLib.LOGGER.info(tomlString);
+                LumynAPI.LOGGER.info(tomlString);
                 TomlParser parser = new TomlParser(tomlString);
-                LumynLib.LOGGER.info("UwU3");
+                LumynAPI.LOGGER.info("UwU3");
                 List<TomlElement> tomlElements = parser.getElements();
-                LumynLib.LOGGER.info("UwU4");
+                LumynAPI.LOGGER.info("UwU4");
                 // create a create a filled in config definition
                 Minecraft.getInstance().setScreen(new ConfigScreen(tomlElements));
-                LumynLib.LOGGER.info("UwU5");
+                LumynAPI.LOGGER.info("UwU5");
             } catch (TomlParsingException e) {
-                LumynLib.LOGGER.error("Error while receiving config screen contents");
-                LumynLib.LOGGER.error(e.getStackTrace());
+                LumynAPI.LOGGER.error("Error while receiving config screen contents");
+                LumynAPI.LOGGER.error(e.getStackTrace());
             }
         });
 
@@ -67,7 +67,7 @@ public class ConfigScreenNetwork {
 
             String tomlPacketContents = serializer.getPacketString();
 
-            LumynLib.LOGGER.info(tomlPacketContents);
+            LumynAPI.LOGGER.info(tomlPacketContents);
 
             FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
             buf.writeBytes(tomlPacketContents.getBytes());
@@ -75,8 +75,8 @@ public class ConfigScreenNetwork {
             NetworkManager.sendToPlayer(player, SEND_CONFIG_SCREEN_PACKET, buf);
 
         } catch (TomlParsingException e) {
-            LumynLib.LOGGER.error("Error while receiving config screen contents");
-            LumynLib.LOGGER.error(e.getStackTrace());
+            LumynAPI.LOGGER.error("Error while receiving config screen contents");
+            LumynAPI.LOGGER.error(e.getStackTrace());
         }
 
     }

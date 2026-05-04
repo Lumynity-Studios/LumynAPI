@@ -11,7 +11,7 @@ architectury {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/lumynlib.accesswidener")
+    accessWidenerPath = file("src/main/resources/lumynapi.accesswidener")
 }
 
 dependencies {

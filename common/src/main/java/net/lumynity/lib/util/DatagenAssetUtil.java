@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -217,7 +217,7 @@ public class DatagenAssetUtil {
                     .put(TextureSlot.FRONT, TextureMapping.getBlockTexture(block, "_front_left"))
                     .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, "_back_left"));
 
-                ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(LumynLib.asMcResource("block/orientable")), Optional.empty(), TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.SOUTH);
+                ModelTemplate customBackOrientable = new ModelTemplate(Optional.of(LumynAPI.asMcResource("block/orientable")), Optional.empty(), TextureSlot.TOP, TextureSlot.FRONT, TextureSlot.SIDE, TextureSlot.SOUTH);
 
                 ResourceLocation singleModel = ModelTemplates.CUBE_ORIENTABLE.create(block, singleMapping, blockGen.modelOutput);
                 ResourceLocation leftModel = customBackOrientable.create(TextureMapping.getBlockTexture(block, "_left"), leftMapping, blockGen.modelOutput);

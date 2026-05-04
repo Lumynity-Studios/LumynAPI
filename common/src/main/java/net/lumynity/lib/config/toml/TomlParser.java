@@ -1,6 +1,6 @@
 package net.lumynity.lib.config.toml;
 
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
@@ -182,7 +182,7 @@ public class TomlParser {
             }
 
         }
-        LumynLib.LOGGER.info("");
+        LumynAPI.LOGGER.info("");
     }
 
     private int getTrailingWhitespace(String chars, int index) {

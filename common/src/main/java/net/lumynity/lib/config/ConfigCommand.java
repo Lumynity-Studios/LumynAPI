@@ -5,7 +5,7 @@ import dev.architectury.event.events.common.CommandRegistrationEvent;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 import net.lumynity.lib.config.screen.ConfigScreenNetwork;
 import net.lumynity.lib.util.CommandUtil;
 
@@ -19,15 +19,15 @@ public class ConfigCommand {
             ConfigDefinition definition = configSerializer.config;
 
 
-            builder.then(Commands.literal(definition.id.toString()).executes((s) -> {
-                if (!CommandUtil.checkIfPlayerExecuted(s)) {
+            builder.then(Commands.literal(definition.id.toString()).executes(context -> {
+                if (!CommandUtil.requirePlayer(context)) {
                     return 1;
                 }
 
-                ServerPlayer player = s.getSource().getPlayer();
+                ServerPlayer player = context.getSource().getPlayer();
 
                 // yay here
-                LumynLib.LOGGER.info("OwO");
+                LumynAPI.LOGGER.info("OwO");
 
                 ConfigScreenNetwork.sendConfigScreenPacket(player, configSerializer);
 

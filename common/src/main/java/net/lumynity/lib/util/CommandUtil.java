@@ -13,11 +13,12 @@ public class CommandUtil {
 //        return source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(level)));
 //    }
 
-    //Prevents commands from being run from server console
-    public static boolean checkIfPlayerExecuted(CommandContext<CommandSourceStack> context) {
+    // Prevents commands from being run from server console
+    // Requires an "if (!CommandUtil.requirePlayer(context)) return 0;" statement
+    public static boolean requirePlayer(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
         if (!(source.getEntity() instanceof ServerPlayer)) {
-            sendFail(source, "Failed to execute \"" + context.getInput() + "\" - Command must be ran by a player.");
+            sendFail(source, "A player is required to run this command here");
             return false;
         }
         return true;

@@ -1,13 +1,13 @@
 package net.lumynity.example.config;
 
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 import net.lumynity.lib.config.FileTypes;
 import net.lumynity.lib.config.fields.*;
 import net.lumynity.lib.config.ConfigDefinition;
 
 public class ExampleTomlConfig extends ConfigDefinition {
     public ExampleTomlConfig() {
-        super(LumynLib.asResource("example_toml_config"), FileTypes.TOML);
+        super(LumynAPI.asResource("example_toml_config"), FileTypes.TOML);
 
         openCat("NUMBERS");
 

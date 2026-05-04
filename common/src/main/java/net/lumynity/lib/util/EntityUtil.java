@@ -7,22 +7,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class EntityUtil {
     // Player
@@ -53,11 +49,11 @@ public class EntityUtil {
     }
     public static boolean hasAdvancement(ServerPlayer player, String AdvancementID) {
         return player.getAdvancements().getOrStartProgress(
-            player.server.getAdvancements().getAdvancement(LumynLib.getHooked().asResource(AdvancementID))
+            player.server.getAdvancements().getAdvancement(LumynAPI.getHooked().asResource(AdvancementID))
         ).isDone();
     }
     public static void grantAdvancement(ServerPlayer player, String AdvancementID) {
-        Advancement advancement = player.server.getAdvancements().getAdvancement(LumynLib.getHooked().asResource(AdvancementID));
+        Advancement advancement = player.server.getAdvancements().getAdvancement(LumynAPI.getHooked().asResource(AdvancementID));
         AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
         if (!progress.isDone()) {
             for (String criteria : progress.getRemainingCriteria())

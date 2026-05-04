@@ -11,4 +11,4 @@ pluginManagement {
 
 include("common", "fabric", "forge")
 
-rootProject.name = "LumynLib"
+rootProject.name = "LumynAPI & Libraries"

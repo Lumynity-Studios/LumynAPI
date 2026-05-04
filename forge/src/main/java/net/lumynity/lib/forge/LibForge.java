@@ -5,9 +5,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 
-@Mod(LumynLib.MOD_ID)
+@Mod(LumynAPI.MOD_ID)
 public final class LibForge {
     public static IEventBus EVENT_BUS;
 
@@ -15,6 +15,6 @@ public final class LibForge {
         MinecraftForge.EVENT_BUS.register(this);
         EVENT_BUS = modContext.getModEventBus();
 
-        LumynLib.init();
+        LumynAPI.init();
     }
 }

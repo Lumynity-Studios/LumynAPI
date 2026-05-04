@@ -2,11 +2,11 @@ package net.lumynity.lib.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 
 public final class LibFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        LumynLib.init();
+        LumynAPI.init();
     }
 }

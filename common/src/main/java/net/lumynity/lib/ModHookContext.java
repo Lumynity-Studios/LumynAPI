@@ -2,15 +2,15 @@ package net.lumynity.lib;
 
 import net.minecraft.resources.ResourceLocation;
 
-public class LibraryContext {
+public class ModHookContext {
     private final String registeredId;
 
-    public LibraryContext(String modId) {
+    public ModHookContext(String modId) {
         registeredId = modId;
     }
 
     public ResourceLocation asResource(String path) {
-        if (registeredId == null) return LumynLib.asMcResource(path);
+        if (registeredId == null) return LumynAPI.asMcResource(path);
         return new ResourceLocation(registeredId, path);
     }
 }

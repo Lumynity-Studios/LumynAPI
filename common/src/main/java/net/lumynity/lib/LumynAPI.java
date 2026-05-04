@@ -8,16 +8,16 @@ import net.lumynity.lib.config.screen.ConfigScreenNetwork;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class LumynLib {
-    public static final Logger LOGGER = LogManager.getLogger(LumynLib.class);
-    public static final String MOD_ID = "lumynlib";
+public final class LumynAPI {
+    public static final Logger LOGGER = LogManager.getLogger(LumynAPI.class);
+    public static final String MOD_ID = "lumynapi";
 
     private static String registeredId = "minecraft";
-    public LumynLib(String modId) {
+    public LumynAPI(String modId) {
         registeredId = modId;
     }
-    public static LibraryContext getHooked() {
-        return new LibraryContext(registeredId);
+    public static ModHookContext getHooked() {
+        return new ModHookContext(registeredId);
     }
 
     public static void init() {

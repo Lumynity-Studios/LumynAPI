@@ -1,6 +1,6 @@
 package net.lumynity.lib.config;
 
-import net.lumynity.lib.LumynLib;
+import net.lumynity.lib.LumynAPI;
 import net.lumynity.lib.config.fields.*;
 import net.lumynity.lib.config.toml.*;
 
@@ -60,9 +60,9 @@ public class ConfigSerializer {
                     fw.close();
 
                 } catch (TomlParsingException e) {
-                    LumynLib.LOGGER.error("FAILED TO PARSE TOML: {}", Arrays.toString(e.getStackTrace()));
+                    LumynAPI.LOGGER.error("FAILED TO PARSE TOML: {}", Arrays.toString(e.getStackTrace()));
                 } catch (IOException e) {
-                    LumynLib.LOGGER.error("FAILED TO WRITE CONFIG FILE: {}", Arrays.toString(e.getStackTrace()));
+                    LumynAPI.LOGGER.error("FAILED TO WRITE CONFIG FILE: {}", Arrays.toString(e.getStackTrace()));
                 }
             }
             case JSON -> {
@@ -238,13 +238,13 @@ public class ConfigSerializer {
             case TOML -> {
 
                 if (!configFile.exists()) {
-                    LumynLib.LOGGER.info("No config file found. Creating a template one");
+                    LumynAPI.LOGGER.info("No config file found. Creating a template one");
                     configFile.getParentFile().mkdirs();
                     try {
                         configFile.createNewFile();
                         writeToConfigFile();
                     } catch (IOException e) {
-                        LumynLib.LOGGER.error("Failed to create missing config file");
+                        LumynAPI.LOGGER.error("Failed to create missing config file");
                     }
                     return;
                 }
@@ -256,8 +256,8 @@ public class ConfigSerializer {
                     applyTomlValuesToConfig(elements, config.items, new ArrayList<>());
 
                 } catch (TomlParsingException e) {
-                    LumynLib.LOGGER.error("Error while parsing TOML of : {}", this.config.id.toString());
-                    LumynLib.LOGGER.error(e);
+                    LumynAPI.LOGGER.error("Error while parsing TOML of : {}", this.config.id.toString());
+                    LumynAPI.LOGGER.error(e);
                     e.printStackTrace();
 
                 }
