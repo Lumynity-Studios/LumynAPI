@@ -1,4 +1,4 @@
-![Titlecard](https://cdn.modrinth.com/data/cached_images/018f9ad185a48adef2e4c3284b8dd322fe71071e.png)
+![Titlecard](https://cdn.modrinth.com/data/cached_images/fef633f9cc50b0e9305f85c1b4b92bf2c7e51901.png)
 
 <pre><center>"API & Libraries"</center></pre>
 
