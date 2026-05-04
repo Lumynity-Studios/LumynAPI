@@ -1,11 +1,11 @@
-# LumynLib
+# LumynAPI
 
 <hr>
 
 Documentation Map - [Gradle Setup](#gradle-setup---repositories), [In-Mod Setup](#java---setup),
-[Config Library](https://github.com/Lumynity-Studios/LumynLib/blob/rep-info/DOCS/DOCS-CONFIG.md),
-[Variable Manager](https://github.com/Lumynity-Studios/LumynLib/blob/rep-info/DOCS/DOCS-VARIABLES.md),
-[Util Classes](https://github.com/Lumynity-Studios/LumynLib/blob/rep-info/DOCS/DOCS-UTIL.md)
+[Config Library](https://github.com/Lumynity-Studios/LumynAPI/blob/rep-info/DOCS/DOCS-CONFIG.md),
+[Variable Manager](https://github.com/Lumynity-Studios/LumynAPI/blob/rep-info/DOCS/DOCS-VARIABLES.md),
+[Util Classes](https://github.com/Lumynity-Studios/LumynAPI/blob/rep-info/DOCS/DOCS-UTIL.md)
 
 <hr>
 
@@ -13,7 +13,9 @@ Documentation Map - [Gradle Setup](#gradle-setup---repositories), [In-Mod Setup]
 <details>
 <summary>Fabric Loom, ForgeGradle, NeoGradle, ModDevGradle</summary>
 
-```gradle
+### Groovy DSL
+
+```groovydsl
 repositories {
     maven {
         name = "Modrinth"
@@ -22,11 +24,19 @@ repositories {
 }
 ```
 
+### Kotlin DSL
+
+```kotlindsl
+repositories {
+    maven("https://api.modrinth.com/maven")
+}
+```
+
 </details>
 <details>
 <summary>Architectury Loom (Root build.gradle)</summary>
 
-```gradle
+```groovydsl
 subprojects {
     repositories {
         maven {
@@ -46,14 +56,14 @@ subprojects {
 
 ### Groovy DSL
 
-```groovy
-modImplementation "maven.modrinth:LumynLib:LIB_VERSION"
+```groovydsl
+modImplementation "maven.modrinth:LumynAPI:LIB_VERSION"
 ```
 
 ### Kotlin DSL
 
-```kotlin
-modImplementation("maven.modrinth:LumynLib:LIB_VERSION")
+```kotlindsl
+implementation("maven.modrinth:LumynAPI:LIB_VERSION")
 ```
 </details>
 <details>
@@ -61,14 +71,14 @@ modImplementation("maven.modrinth:LumynLib:LIB_VERSION")
 
 ### Groovy DSL
 
-```groovy
-implementation fg.deobf("maven.modrinth:LumynLib:LIB_VERSION")
+```groovydsl
+modImplementation fg.deobf("maven.modrinth:LumynAPI:LIB_VERSION")
 ```
 
 ### Kotlin DSL
 
-```kotlin
-implementation(fg.deobf("maven.modrinth:LumynLib:LIB_VERSION"))
+```kotlindsl
+implementation(fg.deobf("maven.modrinth:LumynAPI:LIB_VERSION"))
 ```
 </details>
 <details>
@@ -76,14 +86,14 @@ implementation(fg.deobf("maven.modrinth:LumynLib:LIB_VERSION"))
 
 ### Groovy DSL
 
-```groovy
-implementation "maven.modrinth:LumynLib:LIB_VERSION"
+```groovydsl
+implementation "maven.modrinth:LumynAPI:LIB_VERSION"
 ```
 
 ### Kotlin DSL
 
-```kotlin
-implementation("maven.modrinth:LumynLib:LIB_VERSION")
+```kotlindsl
+implementation("maven.modrinth:LumynAPI:LIB_VERSION")
 ```
 </details>
 
@@ -93,14 +103,14 @@ Replace `LIB_VERSION` with the desired release version found on Modrinth.<br>
 <hr>
 
 ## Java - Setup
-LumynLib needs to know your mod's ID for some util classes and methods.<br>
+LumynAPI needs to know your mod's ID for some util classes and methods.<br>
 Add this to your main mod class:
 
 ```java
-public static final LumynLib Hook = new LumynLib("your_mod_id");
+public static final LumynAPI Hook = new LumynAPI("your_mod_id");
 ```
 > In an Architectury Loom project put it in the common init class
 
 
 
-Note from Millie: this documentation is very not finished
+Note from Millie: this documentation is still unfinished
