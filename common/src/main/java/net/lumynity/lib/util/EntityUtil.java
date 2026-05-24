@@ -5,6 +5,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
@@ -47,13 +48,13 @@ public class EntityUtil {
             }
         }
     }
-    public static boolean hasAdvancement(ServerPlayer player, String AdvancementID) {
+    public static boolean hasAdvancement(ServerPlayer player, ResourceLocation namespacedAdvancementID) {
         return player.getAdvancements().getOrStartProgress(
-            player.server.getAdvancements().getAdvancement(LumynAPI.getHooked().asResource(AdvancementID))
+            player.server.getAdvancements().getAdvancement(namespacedAdvancementID)
         ).isDone();
     }
-    public static void grantAdvancement(ServerPlayer player, String AdvancementID) {
-        Advancement advancement = player.server.getAdvancements().getAdvancement(LumynAPI.getHooked().asResource(AdvancementID));
+    public static void grantAdvancement(ServerPlayer player, ResourceLocation namespacedAdvancementID) {
+        Advancement advancement = player.server.getAdvancements().getAdvancement(namespacedAdvancementID);
         AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
         if (!progress.isDone()) {
             for (String criteria : progress.getRemainingCriteria())
